@@ -26,7 +26,7 @@
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/IndraColor.git
+git clone https://github.com/VitorCarvalho67/IndraColor.git
 cd IndraColor
 ```
 
