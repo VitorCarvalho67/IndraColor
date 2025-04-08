@@ -1,0 +1,11 @@
+[package]
+name = "image_to_theme"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+image = "0.24"
+ratatui = "0.25"
+crossterm = "0.27"
+color-thief = "0.2"
+anyhow = "1.0" 
