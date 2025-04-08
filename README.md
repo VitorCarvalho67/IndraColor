@@ -1,9 +1,9 @@
 ![IndraColor Logo](assets/logo.png)
 
-![GitHub stars](https://img.shields.io/github/stars/seu-usuario/IndraColor?style=social)
-![GitHub forks](https://img.shields.io/github/forks/seu-usuario/IndraColor?style=social)
-![GitHub issues](https://img.shields.io/github/issues/seu-usuario/IndraColor)
-![GitHub license](https://img.shields.io/github/license/seu-usuario/IndraColor)
+![GitHub stars](https://img.shields.io/github/stars/VitorCArvalho67/IndraColor?style=social)
+![GitHub forks](https://img.shields.io/github/forks/VitorCArvalho67/IndraColor?style=social)
+![GitHub issues](https://img.shields.io/github/issues/VitorCArvalho67/IndraColor)
+![GitHub license](https://img.shields.io/github/license/VitorCArvalho67/IndraColor)
 
 > **IndraColor** é uma ferramenta de linha de comando que transforma suas imagens em paletas de cores harmoniosas e suaves. Inspirado no deus hindu Indra, conhecido por sua associação com o arco-íris e as cores, este projeto extrai automaticamente tons pastéis e cria combinações esteticamente agradáveis a partir de qualquer imagem.
 
