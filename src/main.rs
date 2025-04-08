@@ -30,7 +30,6 @@ impl App {
     }
 
     fn to_pastel(r: u8, g: u8, b: u8) -> (u8, u8, u8) {
-        // Converter para tons pastéis aumentando o valor e reduzindo a saturação
         let r = ((r as f32 * 0.7) + 255.0 * 0.3) as u8;
         let g = ((g as f32 * 0.7) + 255.0 * 0.3) as u8;
         let b = ((b as f32 * 0.7) + 255.0 * 0.3) as u8;
@@ -39,26 +38,19 @@ impl App {
 
     fn get_color_variations(r: u8, g: u8, b: u8) -> Vec<(u8, u8, u8)> {
         let mut variations = Vec::new();
-        
-        // Cor original
         variations.push((r, g, b));
-        
-        // Versão mais clara
         let lighter = (
             (r as f32 * 1.2).min(255.0) as u8,
             (g as f32 * 1.2).min(255.0) as u8,
             (b as f32 * 1.2).min(255.0) as u8,
         );
         variations.push(lighter);
-        
-        // Versão mais escura
         let darker = (
             (r as f32 * 0.8) as u8,
             (g as f32 * 0.8) as u8,
             (b as f32 * 0.8) as u8,
         );
         variations.push(darker);
-        
         variations
     }
 
@@ -66,27 +58,28 @@ impl App {
         let img = ImageReader::open(&self.image_path)?.decode()?;
         let colors = color_thief::get_palette(&img.to_rgb8(), ColorFormat::Rgb, 10, 5)?;
         
-        // Pega a cor principal (primeira cor)
         let main_color = colors[0];
         let main_variations = Self::get_color_variations(main_color.r, main_color.g, main_color.b);
         
-        // Pega duas cores de destaque
         let accent_colors = colors[1..3]
             .iter()
             .map(|c| (c.r, c.g, c.b))
             .collect::<Vec<_>>();
         
-        // Combina as variações da cor principal com as cores de destaque
         let mut all_colors = main_variations;
         all_colors.extend(accent_colors);
         
-        // Converte todas as cores para tons pastéis
         self.colors = all_colors
             .iter()
             .map(|&(r, g, b)| Self::to_pastel(r, g, b))
             .collect();
         
         Ok(())
+    }
+
+    // Função para converter RGB para hexadecimal
+    fn rgb_to_hex(r: u8, g: u8, b: u8) -> String {
+        format!("#{:02X}{:02X}{:02X}", r, g, b)
     }
 }
 
@@ -114,7 +107,11 @@ fn main() -> Result<()> {
                     .split(chunks[1]);
 
                 for (i, &(r, g, b)) in app.colors.iter().enumerate() {
-                    let color_block = Block::default().style(Style::default().bg(Color::Rgb(r, g, b)));
+                    let hex = App::rgb_to_hex(r, g, b);
+                    let color_block = Paragraph::new(Text::raw(hex))
+                        .block(Block::default()
+                            .borders(Borders::ALL)
+                            .style(Style::default().bg(Color::Rgb(r, g, b))));
                     f.render_widget(color_block, color_chunks[i]);
                 }
             }
@@ -157,4 +154,4 @@ fn restore_terminal(terminal: &mut Terminal<CrosstermBackend<Stdout>>) -> Result
     stdout().execute(LeaveAlternateScreen)?;
     terminal.show_cursor()?;
     Ok(())
-} 
+}
