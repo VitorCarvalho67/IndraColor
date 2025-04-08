@@ -1,9 +1,6 @@
 # Diretórios de build
 /target/
 
-# Arquivos de configuração do Cargo
-Cargo.lock
-
 # Arquivos de cache do editor
 *.rs.bk
 *.rs.swp
